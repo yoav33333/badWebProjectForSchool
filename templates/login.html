@@ -8,8 +8,8 @@
 </head>
 <body>
     <h1>Login</h1>
-    <form id="login-form" onsubmit="validateForm(event)">
-        <label for="username">Username:</label>
+    <form id="login-form" onsubmit="validateForm(event)" method="POST">
+        <label for="username" >Username:</label>
         <input type="text" id="username" name="username" required>
         <span id="username-error" style="color:red;"></span>
         <br><br>
@@ -23,5 +23,6 @@
         <button type="button" onclick="resetForm()">Reset</button>
     </form>
     <script src="/static/login.js"></script>
+    <p>{{ error }}</p>
 </body>
 </html>

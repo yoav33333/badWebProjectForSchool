@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="../static/base.css">
+    {% block css %}{% endblock %}
+</head>
+<body>
+<header class="header">
+  <div class="logo">Budget Buddy</div>
+  <nav class="nav">
+    <a href="/">hello {{ current_user }}</a>
+    <a href="#investments">Investments</a>
+    <a href="#educate">Educate</a>
+    <a href="#budget">Budget</a>
+    <a href="/login">Log In</a>
+    <a href="/signup">Sign Up</a>
+    <a href="/sign_out">Log Out</a>
+    <a href="#" style="font-size: 20px">🏠</a>
+  </nav>
+</header>
+
+{%block content%}
+{% endblock %}
+</body>
+</html>

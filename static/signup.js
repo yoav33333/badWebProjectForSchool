@@ -1,5 +1,4 @@
-function validateForm(event) {
-    event.preventDefault(); // Prevent form submission for validation
+function validateForm() {
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
     let confirmPassword = document.getElementById("confirm-password").value;
@@ -14,12 +13,6 @@ function validateForm(event) {
     let lastNameError = document.getElementById("last-name-error");
     let emailError = document.getElementById("email-error");
 
-    usernameError.textContent = "";
-    passwordError.textContent = "";
-    confirmPasswordError.textContent = "";
-    firstNameError.textContent = "";
-    lastNameError.textContent = "";
-    emailError.textContent = "";
 
     let isValid = true;
 
@@ -75,8 +68,7 @@ function validateForm(event) {
     }
 
     if (isValid) {
-        alert("Form submitted successfully!");
-        document.getElementById("login-form").reset();
+        document.getElementById("login-form");
     }
 }
 

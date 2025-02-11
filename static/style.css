@@ -1,96 +1,55 @@
-/* Reset all margins, paddings and set box-sizing */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    opacity: 0;
-    animation: fadeIn 2s forwards; /* Add fade-in animation */
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.header {
-    background-color: #2ecc71;
-    padding: 20px;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 10;
-}
-
-.nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
-}
-
-.nav a:hover {
-    color: #344955;
-}
-
-.main-content {
-    display: flex;
-    flex: 1;
-    margin: 20px;
-    gap: 20px; /* Gap between sidebar and content */
-}
-
 .sidebar {
-    width: 280px;
-    margin-right: 0;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centering the charts */
+    justify-content: space-evenly;
+}
+
+.charts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background: #9EB3C2; /* Light background color from palette */
+    gap: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .chart-section {
     width: 300px;
+    /*border: 1px solid #ddd;*/
 
+    padding: 20px;
     margin-bottom: 30px;
+    text-align: center;
 }
 
 .chart {
-    width: 300px;
+    width: 100%;
     height: 200px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background: darkslateblue; /* Strong background color */
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    color: #ffffff; /* Contrast text color */
 }
 
 .content {
-    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .hero {
-    background-color: #3498db;
+    background-color: #21295C; /* Dark primary color */
     color: white;
     padding: 40px;
     text-align: center;
-    border-radius: 8px;
     margin-bottom: 30px;
+    width: 100vw; /* Make the hero section stretch all the way to the right */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
 }
 
 .features {
@@ -106,7 +65,7 @@ body {
 }
 
 .feature-box {
-    background-color: #e74c3c;
+    background-color: #1C7293; /* Vibrant accent color */
     color: white;
     padding: 20px;
     border-radius: 8px;
@@ -121,7 +80,7 @@ body {
 }
 
 .footer {
-    background-color: #2ecc71;
+    background-color: #1B3B6F; /* Footer color from palette */
     color: white;
     text-align: center;
     padding: 10px;
@@ -136,9 +95,10 @@ body {
     }
 
     .main-content {
-        flex-direction: column;
+        display: flex;
+        flex-direction: row;
         margin: 10px;
-        gap: 10px; /* Adjust gap for smaller screens */
+        gap: 10px;
     }
 
     .sidebar {

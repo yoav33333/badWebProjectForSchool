@@ -1,12 +1,9 @@
-function validateForm(event) {
-    event.preventDefault(); // Prevent form submission for validation
+function validateForm() {
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
     let usernameError = document.getElementById("username-error");
     let passwordError = document.getElementById("password-error");
 
-    usernameError.textContent = "";
-    passwordError.textContent = "";
 
     let isValid = true;
 
@@ -37,10 +34,6 @@ function validateForm(event) {
         isValid = false;
     }
 
-    if (isValid) {
-        alert("Login successful!");
-        document.getElementById("login-form").reset();
-    }
 }
 
 function resetForm() {

@@ -8,12 +8,21 @@ function renderExpensesChart() {
     // Sample data for the pie chart
     const data = [
         { name: 'Rent', value: 25 },
+        { name: 'health', value: 25 },
         { name: 'Groceries', value: 20 },
         { name: 'Transport', value: 30 },
         { name: 'Entertainment', value: 15 },
         { name: 'Misc', value: 10 },
+
     ];
-    const colors = ['#f39c12', '#e74c3c', '#3498db', '#2ecc71', '#9b59b6'];
+    function sumData(data){
+        let sum = 0;
+        for (let i = 0; i < data.length; i++){
+            sum += data[i].value;
+        }
+        return sum;
+    }
+    const colors = ['#1C7293', '#065A82', '#21295C', '#1B3B6F', '#117A65', '#4CAF50'];
     const total = data.reduce((sum, item) => sum + item.value, 0);
     const center = { x: canvas.width/2, y: canvas.height/2, radius: canvas.width/4 };
 
@@ -32,6 +41,8 @@ function renderExpensesChart() {
         });
         startAngle += sliceAngle;
     });
+
+
 
     function drawChart(hoveredIndex = null) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -60,7 +71,7 @@ function renderExpensesChart() {
 
             // Draw label for the name
             ctx.font = '12px Arial';
-            ctx.fillStyle = '#344955';
+            ctx.fillStyle = '#000000';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(slice.name, labelX, labelY);
@@ -71,7 +82,7 @@ function renderExpensesChart() {
                 ctx.fillStyle = '#000000';
                 const hoverValueX = center.x + Math.cos(angle) * (center.radius -5); // Further outside for hover values
                 const hoverValueY = center.y + Math.sin(angle) * (center.radius -5);
-                ctx.fillText(`${slice.value}%`, hoverValueX, hoverValueY);
+                ctx.fillText(`${slice.value/sumData(data)*100}%`, hoverValueX, hoverValueY);
             }
         });
     }
@@ -110,6 +121,15 @@ function renderExpensesChart() {
     drawChart(); // Initial draw
     document.getElementById('expenses-chart').appendChild(canvas);
 }
+ function maxFromArr(arr){
+        max = arr[0];
+        for (let i = 1; i < arr.length; i++){
+            if (arr[i] > max){
+                max = arr[i];
+            }
+        }
+        return max;
+    }
 
 // Function to render a line chart with hover interactivity
 function renderInvestmentsChart() {
@@ -119,7 +139,7 @@ function renderInvestmentsChart() {
     const ctx = canvas.getContext('2d');
 
     // Sample data for the line chart
-    const data = [10, 20, 15, 30, 40];
+    const data = [1000, 20, 0, 30, 4800, 40, 20, 60,200, 1000, 5000];
     const points = [];
     const offset = 20
     // Draw axes
@@ -135,8 +155,8 @@ function renderInvestmentsChart() {
     // Draw the data as a line and store points for interactivity
     ctx.beginPath();
     data.forEach((value, index) => {
-        const x = offset + index * 50;
-        const y = canvas.height-offset - value * 2;
+        const x = offset + index * ((canvas.width-30)/data.length);
+        const y = canvas.height-offset - value*((canvas.height-offset*3)/2/(maxFromArr(data)/2));
         points.push({ x, y, value });
 
         if (index === 0) {
@@ -185,8 +205,8 @@ function renderInvestmentsChart() {
         // Redraw the line
         ctx.beginPath();
         data.forEach((value, index) => {
-            const x = offset + index * 50;
-            const y = canvas.height-offset - value * 2;
+            const x = offset + index * ((canvas.width-30)/data.length);
+            const y = canvas.height-offset - value*((canvas.height-offset*3)/2/(maxFromArr(data)/2));
             if (index === 0) {
                 ctx.moveTo(x, y);
             } else {

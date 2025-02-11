@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Extended Login Form</title>
+    <title>Sign up</title>
 
 </head>
 <body>
-    <h1>Extended Login Form</h1>
-    <form id="login-form" onsubmit="validateForm(event)">
+    <h1>Sign up</h1>
+    <form method="POST" id="login-form" onsubmit="validateForm()">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
         <span id="username-error" style="color:red;"></span>
         <br><br>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <input type="text" id="password" name="password" required>
         <span id="password-error" style="color:red;"></span>
         <br><br>
 
         <label for="confirm-password">Confirm Password:</label>
-        <input type="password" id="confirm-password" name="confirm-password" required>
+        <input type="text" id="confirm-password" name="confirm-password" required>
         <span id="confirm-password-error" style="color:red;"></span>
         <br><br>
 
@@ -43,6 +43,7 @@
         <button type="button" onclick="resetForm()">Reset</button>
         <button type="button" onclick="showPassword()">Show</button>
     </form>
+    <p style="color: red">{{ error }}</p>
     <script src="/static/signup.js"></script>
 </body>
 </html>

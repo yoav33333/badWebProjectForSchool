@@ -1,0 +1,45 @@
+/* styles.css */
+
+body {
+  background: linear-gradient(135deg, #21295C, #065A82); /* Updated gradient using theme colors */
+  margin: 0;
+  font-family: Arial, sans-serif;
+  transition: margin-left 0.3s ease;
+}
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: -200px;
+  width: 200px;
+  height: 100%;
+  background-color: #1B3B6F; /* Dark sidebar color from palette */
+  color: white;
+  transition: left 0.3s ease;
+  padding: 10px 0;
+}
+
+#sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+#sidebar ul li {
+  margin: 20px 0;
+}
+
+#sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px;
+}
+
+#sidebar ul li a:hover {
+  background-color: #1C7293; /* Vibrant hover color */
+}
+
+#content {
+  transition: margin-left 0.3s ease;
+  padding: 20px;
+}
