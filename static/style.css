@@ -1,7 +1,17 @@
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    width: 320px;
+    background: #1C3144; /* Dark blue for contrast */
+    color: white;
+    padding: 7px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
 
 .charts {
@@ -9,8 +19,8 @@
     flex-direction: row;
     justify-content: space-evenly;
     background: #9EB3C2; /* Light background color from palette */
-    gap: 20px;
-    padding: 20px;
+    /*gap: 20px;*/
+    padding: 15px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -18,22 +28,23 @@
 .chart-section {
     width: 300px;
     /*border: 1px solid #ddd;*/
+    /*background: #2B4865;*/
 
-    padding: 20px;
-    margin-bottom: 30px;
+    padding: 10px;
+    /*margin-bottom: 10px;*/
     text-align: center;
 }
 
 .chart {
     width: 100%;
     height: 200px;
-    background: darkslateblue; /* Strong background color */
-    border-radius: 8px;
+    background: #4682A9; /* Softer blue */
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.2em;
-    color: #ffffff; /* Contrast text color */
+    color: #ffffff;
 }
 
 .content {
@@ -42,42 +53,76 @@
     justify-content: space-between;
 }
 
+/*.hero {*/
+/*    background-color: #21295C; !* Dark primary color *!*/
+/*    color: white;*/
+/*    padding: 40px;*/
+/*    text-align: center;*/
+/*    margin-bottom: 30px;*/
+/*    width: 100vw; !* Make the hero section stretch all the way to the right *!*/
+/*    box-sizing: border-box; !* Ensure padding and border are included in the width *!*/
+/*}*/
 .hero {
-    background-color: #21295C; /* Dark primary color */
+    background: linear-gradient(135deg, #407088, #1C3144);
     color: white;
-    padding: 40px;
+    margin-top: 0;
+    padding: 50px;
     text-align: center;
-    margin-bottom: 30px;
-    width: 100vw; /* Make the hero section stretch all the way to the right */
-    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
+.main-section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 7px;
+    margin-left: 15px;
+}
 .features {
     margin-top: 30px;
     text-align: center;
 }
 
+/*.features-container {*/
+/*    padding-top: 10px;*/
+/*    display: flex;*/
+/*    justify-content: space-around;*/
+/*    flex-wrap: wrap;*/
+/*}*/
 .features-container {
-    padding-top: 10px;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    gap: 20px;
 }
-
+/*.feature-box {*/
+/*    background-color: #1C7293; !* Vibrant accent color *!*/
+/*    color: white;*/
+/*    padding: 20px;*/
+/*    border-radius: 8px;*/
+/*    width: 25%;*/
+/*    cursor: pointer;*/
+/*    transition: transform 0.3s;*/
+/*    margin-bottom: 20px;*/
+/*}*/
 .feature-box {
-    background-color: #1C7293; /* Vibrant accent color */
+    background: #3A7D89;
     color: white;
     padding: 20px;
-    border-radius: 8px;
-    width: 25%;
-    cursor: pointer;
-    transition: transform 0.3s;
-    margin-bottom: 20px;
+    border-radius: 10px;
+    flex: 1;
+    min-width: 160px;
+    text-align: center;
+    transition: transform 0.3s ease, background 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 .feature-box:hover {
-    transform: translateY(-10px);
+    transform: scale(1.05);
+    background: #2B5F75;
 }
+/*.feature-box:hover {*/
+/*    transform: translateY(-10px);*/
+/*}*/
 
 .footer {
     background-color: #1B3B6F; /* Footer color from palette */

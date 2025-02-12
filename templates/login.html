@@ -1,12 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Login Form</title>#}
+{##}
+{#</head>#}
+{#<body>#}
+{#    <h1>Login</h1>#}
+{#    <form id="login-form" onsubmit="validateForm(event)" method="POST">#}
+{#        <label for="username" >Username:</label>#}
+{#        <input type="text" id="username" name="username" required>#}
+{#        <span id="username-error" style="color:red;"></span>#}
+{#        <br><br>#}
+{##}
+{#        <label for="password">Password:</label>#}
+{#        <input type="password" id="password" name="password" required>#}
+{#        <span id="password-error" style="color:red;"></span>#}
+{#        <br><br>#}
+{##}
+{#        <button type="submit">Submit</button>#}
+{#        <button type="button" onclick="resetForm()">Reset</button>#}
+{#    </form>#}
+{#    <script src="/static/login.js"></script>#}
+{#    <p>{{ error }}</p>#}
+{#</body>#}
+{#</html>#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{% extends 'newBase.html' %}
+{% block title %}Login Form{% endblock %}
 
-</head>
-<body>
+{% block css %}
+{#	<link rel="stylesheet" href="../static/style.css">#}
+{% endblock %}
+
+{% block content %}
     <h1>Login</h1>
     <form id="login-form" onsubmit="validateForm(event)" method="POST">
         <label for="username" >Username:</label>
@@ -22,7 +51,8 @@
         <button type="submit">Submit</button>
         <button type="button" onclick="resetForm()">Reset</button>
     </form>
-    <script src="/static/login.js"></script>
     <p>{{ error }}</p>
-</body>
-</html>
+    <script src="/static/login.js"></script>
+{% endblock %}
+
+

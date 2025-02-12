@@ -1,27 +1,32 @@
-/* styles.css */
-
 body {
-  background: linear-gradient(135deg, #21295C, #065A82); /* Updated gradient using theme colors */
+  background: linear-gradient(135deg, #0F2027, #203A43, #2C5364); /* Deep blue gradient */
+  background-attachment: fixed;
+  background-size: cover;
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   transition: margin-left 0.3s ease;
+  color: #ffffff;
 }
 
+
+/* Sidebar */
 #sidebar {
   position: fixed;
   top: 0;
-  left: -200px;
-  width: 200px;
+  left: -150px; /* Start hidden */
+  width: 150px;
   height: 100%;
-  background-color: #1B3B6F; /* Dark sidebar color from palette */
+  background-color: #1B3B6F; /* Deep navy */
   color: white;
-  transition: left 0.3s ease;
-  padding: 10px 0;
+  transition: left 0.3s ease-in-out;
+  padding: 20px 0;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
 }
 
 #sidebar ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 #sidebar ul li {
@@ -32,14 +37,57 @@ body {
   color: white;
   text-decoration: none;
   display: block;
-  padding: 10px 20px;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: background 0.3s ease, transform 0.2s;
 }
 
 #sidebar ul li a:hover {
-  background-color: #1C7293; /* Vibrant hover color */
+  background-color: #1C7293; /* Bright hover color */
+  transform: scale(1.05);
 }
 
+/* Content */
 #content {
   transition: margin-left 0.3s ease;
   padding: 20px;
+}
+
+/* Sidebar Toggle Button */
+#toggle-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: #1C7293;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+#toggle-btn:hover {
+  background-color: #0E4F6F;
+  transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #sidebar {
+    width: 170px;
+    left: -170px;
+  }
+
+  #sidebar ul li a {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  #toggle-btn {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
 }
