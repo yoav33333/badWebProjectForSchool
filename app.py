@@ -11,20 +11,24 @@ class User:
 
 class Users:
    def __init__(self, users=None):
+      #create db
       if users is None:
           users = []
       self.users = users
 
    def add_user(self, user):
+       #insert new username
       self.users.append(user)
 
    def does_exists(self, username):
+       # check if username exists
       for user in self.users:
          if user.username == username:
             return True
       return False
 
    def username_and_password_correct(self, username, password):
+       #check if there is a correct comb of username and password
       for user in self.users:
          if user.username == username and user.password == password:
             return user

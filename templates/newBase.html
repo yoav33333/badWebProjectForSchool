@@ -12,12 +12,15 @@
     <ul>
       <li><a href="#">🏠</a></li>
       <li><a href="#">hello {{ current_user }}</a></li>
-      <li><a href="/sign_out">Log Out</a></li>
+      {% if current_user == "guest" %}
       <li><a href="/signup">Sign Up</a></li>
-      <li><a href="/login">Log In</a></li>
+        <li><a href="/login">Log In</a></li>
+        {% else %}
+        <li><a href="/sign_out">Log Out</a></li>
       <li><a href="#">Budget</a></li>
       <li><a href="#">Educate</a></li>
       <li><a href="#">Investments</a></li>
+        {% endif %}
     </ul>
   </div>
   <div id="content">
