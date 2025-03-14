@@ -1,0 +1,33 @@
+{% extends 'newBase.html' %}
+{% block title %}users{% endblock %}
+
+{% block css %}
+{#	<link rel="stylesheet" href="../static/style.css">#}
+{% endblock %}
+
+{% block content %}
+    <table border="2">
+        <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+        </tr>
+   {% for user in users %}
+   <tr>
+    <td>{{ i }}</td>
+    {% for i in  user%}
+    	<td>{{ i }}</td>
+    {% endfor %}
+
+
+{#       <td>{{ user[1] }}</td>#}
+{#       <td>{{ user[2] }}</td>#}
+{#       <td>{{ user[3] }}</td>#}
+{#       <td>{{ user[4] }}</td>#}
+   </tr>
+   {% endfor %}
+    </table>
+
+{% endblock %}
