@@ -51,46 +51,58 @@
 {% block title %}Sign up{% endblock %}
 
 {% block css %}
-{#	<link rel="stylesheet" href="../static/style.css">#}
+	<link rel="stylesheet" href="../static/signup.css">
 {% endblock %}
 
 {% block content %}
+<div class="container">
     <h1>Sign up</h1>
-    <form method="POST" id="login-form" onsubmit="validateForm()">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <span id="username-error" style="color:red;"></span>
-        <br><br>
+    <form method="POST" id="login-form" onsubmit="validateForm(event)">
+        <div class="input-group">
+            <input type="text" id="username" name="username" required placeholder=" ">
+            <label for="username">Username</label>
+            <span id="username-error" class="error-message"></span>
+        </div>
 
-        <label for="password">Password:</label>
-        <input type="text" id="password" name="password" required>
-        <span id="password-error" style="color:red;"></span>
-        <br><br>
+        <div class="input-group">
+            <input type="password" id="password" name="password" required placeholder=" ">
+            <label for="password">Password</label>
+            <span id="password-error" class="error-message"></span>
+        </div>
 
-        <label for="confirm-password">Confirm Password:</label>
-        <input type="text" id="confirm-password" name="confirm-password" required>
-        <span id="confirm-password-error" style="color:red;"></span>
-        <br><br>
+        <div class="input-group">
+            <input type="password" id="confirm-password" name="confirm-password" required placeholder=" ">
+            <label for="confirm-password">Confirm Password</label>
+            <span id="confirm-password-error" class="error-message"></span>
+        </div>
 
-        <label for="first-name">First Name:</label>
-        <input type="text" id="first-name" name="first-name" required>
-        <span id="first-name-error" style="color:red;"></span>
-        <br><br>
+        <div class="input-group">
+            <input type="text" id="first-name" name="first-name" required placeholder=" ">
+            <label for="first-name">First Name</label>
+            <span id="first-name-error" class="error-message"></span>
+        </div>
 
-        <label for="last-name">Last Name:</label>
-        <input type="text" id="last-name" name="last-name" required>
-        <span id="last-name-error" style="color:red;"></span>
-        <br><br>
+        <div class="input-group">
+            <input type="text" id="last-name" name="last-name" required placeholder=" ">
+            <label for="last-name">Last Name</label>
+            <span id="last-name-error" class="error-message"></span>
+        </div>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <span id="email-error" style="color:red;"></span>
-        <br><br>
+        <div class="input-group">
+            <input type="email" id="email" name="email" required placeholder=" ">
+            <label for="email">Email</label>
+            <span id="email-error" class="error-message"></span>
+        </div>
 
-        <button type="submit">Submit</button>
-        <button type="button" onclick="resetForm()">Reset</button>
-        <button type="button" onclick="showPassword()">Show</button>
+        <div class="button-group">
+            <button type="submit">Submit</button>
+            <button type="button" class="secondary" onclick="resetForm()">Reset</button>
+            <button type="button" class="secondary" onclick="showPassword()">Show</button>
+        </div>
     </form>
+</div>
+
+
     <p style="color: red">{{ error }}</p>
     <script src="/static/signup.js"></script>
 {% endblock %}

@@ -67,8 +67,8 @@ function validateForm() {
         isValid = false;
     }
 
-    if (isValid) {
-        document.getElementById("login-form");
+    if (!isValid) {
+        document.getElementById("login-form").reset();
     }
 }
 

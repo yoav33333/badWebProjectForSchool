@@ -104,11 +104,12 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        n = username is None or password is None
         if users.username_and_password_correct(username, password):
             global current_user
             current_user = username
             return render_template('home.html', current_user=username, is_admin=users.is_admin(current_user))
-        return render_template('login.html', error="Username or password are incorrect", current_user=current_user, is_admin=users.is_admin(current_user))
+        return render_template('login.html', error=""if n else  "Username or password are incorrect", current_user=current_user, is_admin=users.is_admin(current_user))
     return render_template('login.html', current_user=current_user, is_admin=users.is_admin(current_user))
 
 def main():

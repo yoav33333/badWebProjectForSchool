@@ -1,0 +1,120 @@
+/* General Page Styling */
+body {
+    font-family: 'Inter', sans-serif;
+    background: #1C3144; /* Softer light grayish-blue */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+    margin: 0;
+}
+
+/* Form Card Container */
+.container {
+    margin-top: 5%;
+    background: #1C3144;
+    padding: 20px 20px;
+    border-radius: 12px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.08);
+    width: 420px;
+    text-align: center;
+    position: relative;
+}
+
+/* Form Header */
+h1 {
+    font-size: 1.8em;
+    color: white;
+    margin-bottom: 17px;
+}
+
+/* Input Field Wrapper */
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+    text-align: left;
+    background: #F8FAFC; /* Light input background */
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    transition: border 0.3s ease;
+}
+
+/* Floating Labels */
+.input-group label {
+    position: absolute;
+    top: 14px;
+    left: 18px;
+    font-size: 0.9em;
+    color: #888;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* Input Fields */
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    background: transparent;
+    font-size: 1em;
+    outline: none;
+}
+
+/* Move Label Up When Typing */
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+    top: -6px;
+    left: 12px;
+    background: transparent;
+    padding: 2px 5px;
+    font-size: 0.75em;
+    color: #007BFF;
+}
+
+/* Input Focus Effect */
+.input-group:focus-within {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Error Messages */
+.error-message {
+    font-size: 0.85em;
+    color: #D32F2F;
+    margin-top: 5px;
+}
+
+/* Buttons Container */
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* Button Styling */
+button {
+    flex: 1;
+    background: #007BFF;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* Secondary Button */
+button.secondary {
+    background: #ccc;
+    color: #333;
+}
+
+button.secondary:hover {
+    background: #bbb;
+}

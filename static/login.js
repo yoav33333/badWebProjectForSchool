@@ -33,6 +33,9 @@ function validateForm() {
         passwordError.textContent = "Password must not contain spaces.";
         isValid = false;
     }
+    if (!isValid) {
+        document.getElementById("login-form").reset();
+    }
 
 }
 

@@ -1,58 +1,27 @@
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
-{#    <title>Login Form</title>#}
-{##}
-{#</head>#}
-{#<body>#}
-{#    <h1>Login</h1>#}
-{#    <form id="login-form" onsubmit="validateForm(event)" method="POST">#}
-{#        <label for="username" >Username:</label>#}
-{#        <input type="text" id="username" name="username" required>#}
-{#        <span id="username-error" style="color:red;"></span>#}
-{#        <br><br>#}
-{##}
-{#        <label for="password">Password:</label>#}
-{#        <input type="password" id="password" name="password" required>#}
-{#        <span id="password-error" style="color:red;"></span>#}
-{#        <br><br>#}
-{##}
-{#        <button type="submit">Submit</button>#}
-{#        <button type="button" onclick="resetForm()">Reset</button>#}
-{#    </form>#}
-{#    <script src="/static/login.js"></script>#}
-{#    <p>{{ error }}</p>#}
-{#</body>#}
-{#</html>#}
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{% extends 'newBase.html' %}
-{% block title %}Login Form{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form id="login-form" onsubmit="validateForm(event)" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <span id="username-error" class="error-message"></span>
 
-{% block css %}
-{#	<link rel="stylesheet" href="../static/style.css">#}
-{% endblock %}
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <span id="password-error" class="error-message"></span>
 
-{% block content %}
-    <h1>Login</h1>
-    <form id="login-form" onsubmit="validateForm(event)" method="POST">
-        <label for="username" >Username:</label>
-        <input type="text" id="username" name="username" required>
-        <span id="username-error" style="color:red;"></span>
-        <br><br>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <span id="password-error" style="color:red;"></span>
-        <br><br>
-
-        <button type="submit">Submit</button>
-        <button type="button" onclick="resetForm()">Reset</button>
-    </form>
-    <p>{{ error }}</p>
-    <script src="/static/login.js"></script>
-{% endblock %}
-
-
+            <button type="submit">Submit</button>
+            <button type="button" onclick="resetForm()">Reset</button>
+        </form>
+    </div>
+    <script src="validateForm.js"></script>
+</body>
+</html>
