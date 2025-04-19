@@ -1,0 +1,168 @@
+{% extends "newBase.html" %}
+
+{% block title %}Expenses{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/expenses.css">
+{% endblock %}
+
+{% block content %}
+<div class="expenses-container">
+    <h1>Expenses for {{ current_user }}</h1>
+    {% if current_user != "guest" %}
+    <div class="form-container">
+        <h2>Add New Expense</h2>
+        <form method="POST" action="/expenses">
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <input type="text" id="category" name="category" placeholder="Category" list="categories" required>
+                <datalist id="categories">
+                    <option value="Food">
+                    <option value="Transportation">
+                    <option value="Utilities">
+                    <option value="Entertainment">
+                    <option value="Healthcare">
+                    <option value="Education">
+                    <option value="Shopping">
+                    <option value="Other">
+                </datalist>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" step="0.01" placeholder="Amount" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <button type="submit" class="btn">Add Expense</button>
+        </form>
+    </div>
+
+    <div class="chart-section">
+        <div class="chart-container">
+            <h2>Budget vs Expenses</h2>
+<canvas id="expensesBudgetChart" class="pie-chart"></canvas>        </div>
+        <script src="/static/expenses.js"></script>
+        <script>createDoughnutChart([...{{ expenses_data.labels|tojson }}], [...{{ expenses_data.data|tojson }}], {{ monthly_budget }});</script>
+        <div class="chart-container">
+            <h2>Monthly Expenses by Category</h2>
+            <canvas id="monthlyExpensesChart"></canvas>
+        </div>
+ <script src="/static/expenses.js"></script>
+        <script>createBarChart({{bar_chart_data|tojson}});</script>
+    </div>
+    {% else %}
+    <p>You must be logged in to view your expenses chart.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+{##}
+{#{% extends "newBase.html" %}#}
+{##}
+{#{% block title %}Expenses{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#<h1>Expenses for {{ current_user }}</h1>#}
+{#{% if current_user != "guest" %}#}
+{#<form method="POST" action="/expenses">#}
+{#    <label for="category">Category:</label>#}
+{#    <input type="text" id="category" name="category" placeholder="Category" list="categories" required>#}
+{#    <datalist id="categories">#}
+{#        <option value="Food">#}
+{#        <option value="Transportation">#}
+{#        <option value="Utilities">#}
+{#        <option value="Entertainment">#}
+{#        <option value="Healthcare">#}
+{#        <option value="Education">#}
+{#        <option value="Shopping">#}
+{#        <option value="Other">#}
+{#    </datalist>#}
+{#    <label for="amount">Amount:</label>#}
+{#    <input type="number" id="amount" name="amount" step="0.01" placeholder="Amount" required>#}
+{#    <label for="date">Date:</label>#}
+{#    <input type="date" id="date" name="date" required>#}
+{#    <button type="submit">Add Expense</button>#}
+{#</form>#}
+{#<div class="chart-container">#}
+{#    <h2>Budget vs Expenses</h2>#}
+{#    <canvas id="expensesBudgetChart"></canvas>#}
+{#</div>#}
+{##}
+{#<script>#}
+{#    const expensesBudgetCtx = document.getElementById('expensesBudgetChart').getContext('2d');#}
+{#    const expensesLabels = [...{{ expenses_data.labels|tojson }}, 'Remaining Budget', 'Exceeding Budget'];#}
+{#    const expensesData = [...{{ expenses_data.data|tojson }}];#}
+{#    const expensesBudget = {{ monthly_budget }};#}
+{#    const expensesTotal = expensesData.reduce((a, b) => a + b, 0);#}
+{##}
+{#    // Calculate remaining and exceeding amounts#}
+{#    const remainingBudget = Math.max(expensesBudget - expensesTotal, 0);#}
+{#    const exceedingBudget = Math.max(expensesTotal - expensesBudget, 0);#}
+{##}
+{#    // Add remaining and exceeding amounts to the data#}
+{#    expensesData.push(remainingBudget, exceedingBudget);#}
+{##}
+{#    // Define colors: red for exceeding, blue for remaining, and others for categories#}
+{#    const colors = [#}
+{#        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#FF0000', // Category colors#}
+{#        '#36A2EB', // Remaining Budget (blue)#}
+{#        '#FF0000'  // Exceeding Budget (red)#}
+{#    ];#}
+{##}
+{#    new Chart(expensesBudgetCtx, {#}
+{#        type: 'doughnut',#}
+{#        data: {#}
+{#            labels: expensesLabels,#}
+{#            datasets: [{#}
+{#                data: expensesData,#}
+{#                backgroundColor: colors.slice(0, expensesLabels.length),#}
+{#            }]#}
+{#        },#}
+{#        options: {#}
+{#            responsive: true,#}
+{#            plugins: {#}
+{#                legend: { display: true, position: 'top' }#}
+{#            }#}
+{#        }#}
+{#    });#}
+{#</script>#}
+{#    <div class="chart-container">#}
+{#    <h2>Monthly Expenses by Category</h2>#}
+{#    <canvas id="monthlyExpensesChart"></canvas>#}
+{#</div>#}
+{##}
+{#<script>#}
+{#    const barChartCtx = document.getElementById('monthlyExpensesChart').getContext('2d');#}
+{#    const barChartData = {{ bar_chart_data|tojson }};#}
+{#    const months = barChartData.months;#}
+{#    const categories = barChartData.categories;#}
+{#    const data = barChartData.data;#}
+{##}
+{#    new Chart(barChartCtx, {#}
+{#        type: 'bar',#}
+{#        data: {#}
+{#            labels: months,#}
+{#            datasets: categories.map((category, index) => ({#}
+{#                label: category,#}
+{#                data: data.map(monthData => monthData[index]),#}
+{#                backgroundColor: `hsl(${index * 50}, 70%, 50%)`#}
+{#            }))#}
+{#        },#}
+{#        options: {#}
+{#            responsive: true,#}
+{#            plugins: {#}
+{#                legend: { display: true, position: 'top' }#}
+{#            },#}
+{#            scales: {#}
+{#                x: { stacked: true },#}
+{#                y: { stacked: true }#}
+{#            }#}
+{#        }#}
+{#    });#}
+{#</script>#}
+{#{% else %}#}
+{#<p>You must be logged in to view your expenses chart.</p>#}
+{#{% endif %}#}
+{#{% endblock %}#}

@@ -1,0 +1,73 @@
+{% extends 'newBase.html' %}
+
+{% block title %}Stocks{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="/static/stocks.css">
+{% endblock %}
+
+{% block content %}
+<h1>Stocks</h1>
+
+
+<div class="content-container">
+    <div class="forms-container">
+        <!-- Buy Stock Form -->
+        <form method="POST" action="/stocks" class="stock-form">
+            <h3>Buy Stock</h3>
+            <input type="hidden" name="action" value="buy">
+            <label for="stock_name">Stock Name or Index:</label>
+            <input type="text" id="stock_name" name="stock_name" placeholder="Stock Name or Index" list="buy-stocks" required>
+            <datalist id="buy-stocks">
+                {% for company in companies %}
+                    <option value="{{ company }}">
+                {% endfor %}
+            </datalist>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" placeholder="Quantity" required>
+            <label for="purchase_date">Purchase Date:</label>
+            <input type="date" id="purchase_date" name="purchase_date" required>
+            <button type="submit">Buy Stock</button>
+        </form>
+
+        <!-- Sell Stock Form -->
+        <form method="POST" action="/stocks" class="stock-form">
+            <h3>Sell Stock</h3>
+            <input type="hidden" name="action" value="sell">
+            <label for="stock_name">Stock Name or Index:</label>
+            <input type="text" id="stock_name" name="stock_name" placeholder="Stock Name or Index" list="sell-stocks" required>
+            <datalist id="sell-stocks">
+                {% for stock in stocks %}
+                    <option value="{{ stock.stock_name }}">
+                {% endfor %}
+            </datalist>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" placeholder="Quantity" required>
+            <label for="sell_date">Sell Date:</label>
+            <input type="date" id="sell_date" name="sell_date" required>
+            <button type="submit">Sell Stock</button>
+        </form>
+    </div>
+
+    <div class="graph-container">
+        <h2>Total Money Over Time</h2>
+        <canvas id="stockChart" style="width: 100%; height: 400px;"></canvas>
+    </div>
+</div>
+<div class="time-period-selector">
+    <label for="time-period">Select Time Period:</label>
+    <select id="time-period" name="time_period" onchange="updateTimePeriod()">
+        <option value="6mo" {% if time_period == "6mo" %}selected{% endif %}>6 Months</option>
+        <option value="1y" {% if time_period == "1y" %}selected{% endif %}>1 Year</option>
+        <option value="5y" {% if time_period == "5y" %}selected{% endif %}>5 Years</option>
+        <option value="10y" {% if time_period == "10y" %}selected{% endif %}>10 Years</option>
+        <option value="max" {% if time_period == "max" %}selected{% endif %}>Max</option>
+    </select>
+</div>
+
+<script src="/static/stocks.js"></script>
+<canvas id="stockChart" style="width: 100%; height: 400px;"></canvas>
+
+<script>createChart({{ weekly_data|tojson }});</script>
+
+
+{% endblock %}

@@ -1,0 +1,86 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* Light background */
+    color: #212529; /* Dark text color */
+}
+
+.user-list {
+    max-width: 90%;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table,
+th,
+td {
+    border: 1px solid #dee2e6;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 12px;
+}
+
+th {
+    background-color: #343a40; 
+    color: #ffffff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e9ecef;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+/* Labels and Inputs */
+form label {
+    font-weight: bold;
+}
+
+form select,
+form button {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+form button {
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}

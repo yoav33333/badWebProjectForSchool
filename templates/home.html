@@ -4,21 +4,32 @@
 {% block title %}Home{% endblock %}
 
 {% block css %}
-	<link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/style.css">
 {% endblock %}
 
 {% block content %}
-	<main class="main-content">
+<main class="main-content">
     <section class="content">
         <aside class="sidebar">
-            <div class="chart-section">
-                <h2>Expenses</h2>
-                <div class="chart" id="expenses-chart"></div>
-            </div>
-            <div class="chart-section">
-                <h2>Investments</h2>
-                <div class="chart" id="investments-chart"></div>
-            </div>
+            <h1>Welcome, {{ current_user }}</h1>
+            {% if current_user != "guest" %}
+                <!-- Line graph for weekly stock prices -->
+                <h2>Weekly Stock Prices</h2>
+                <canvas id="stockChart" height="300"></canvas>
+
+
+                <script src="/static/script.js"></script>
+                <script >createInvestmentGraph({{ weekly_data|tojson }});</script>
+                <div class="chart-container">
+    <h2>Budget</h2>
+    <canvas id="homeBudgetChart"></canvas>
+</div>
+
+<script src="/static/script.js"></script>
+                <script>createExpensesGraph({{ monthly_budget }}, {{ expenses_data.data|sum }});</script>
+            {% else %}
+                <p>Please log in to view your data.</p>
+            {% endif %}
         </aside>
 
         <section class="main-section">
@@ -32,16 +43,10 @@
                 <div class="features-container">
                     <div class="feature-box">Track Expenses</div>
                     <div class="feature-box">Monitor Investments</div>
-                    <div class="feature-box">Set Goals</div>
+                    <div class="feature-box">Mange Budgets</div>
                 </div>
             </section>
         </section>
     </section>
 </main>
-
-
-
-<script src="../static/script.js"></script>
 {% endblock %}
-
-

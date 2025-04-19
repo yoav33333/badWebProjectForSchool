@@ -1,0 +1,59 @@
+.forms-container {
+    display: flex;
+    gap: 20px; /* Space between the forms */
+    justify-content: space-between;
+}
+
+.stock-form {
+    flex: 1; /* Make both forms take equal width */
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.stock-form h3 {
+    margin-top: 0;
+}
+
+.stock-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.stock-form input, .stock-form button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.stock-form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.stock-form button:hover {
+    background-color: #45a049;
+}
+.content-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.forms-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+}
+
+.graph-container {
+    flex: 2;
+}

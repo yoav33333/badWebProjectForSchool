@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/static/newBase.css">
 </head>
 <body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <div id="sidebar">
     <ul>
       <li><a href="\">🏠</a></li>
@@ -16,13 +17,13 @@
       <li><a href="/signup">Sign Up</a></li>
         <li><a href="/login">Log In</a></li>
         {% else %}
-        <li><a href="/sign_out">Log Out</a></li>
-      <li><a href="#">Budget</a></li>
-      <li><a href="#">Educate</a></li>
-      <li><a href="#">Investments</a></li>
+        <li><a href="/expenses">Expenses</a></li>
+        <li><a href="/stocks">Stocks</a></li>
+        <li><a href="/money_management">Money Management</a></li>
+        <li><a href="/sign_out">Sign Out</a></li>
         {% endif %}
-    {%if is_admin %}
-        <li><a href="/users">users</a></li>
+        {%if is_admin %}
+            <li><a href="/users">users</a></li>
         {% endif %}
     </ul>
   </div>

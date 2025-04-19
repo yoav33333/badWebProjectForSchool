@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocks</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Display flashed messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Form for adding stocks -->
+    <form method="POST">
+        <label for="stock_name">Stock Name:</label>
+        <input type="text" id="stock_name" name="stock_name" required>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" required>
+        <label for="purchase_date">Purchase Date:</label>
+        <input type="date" id="purchase_date" name="purchase_date" required>
+        <button type="submit">Add Stock</button>
+    </form>
+
+    <!-- Line graph for weekly stock prices -->
+    <h2>Weekly Stock Prices</h2>
+    <canvas id="stockChart"></canvas>
+
+    <script>
+        const weeklyData = {{ weekly_data|tojson }};
+        const labels = weeklyData.map(data => data.date);
+        const prices = weeklyData.map(data => data.price);
+
+        const ctx = document.getElementById('stockChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Stock Price (USD)',
+                    data: prices,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Price (USD)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

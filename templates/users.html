@@ -2,32 +2,48 @@
 {% block title %}users{% endblock %}
 
 {% block css %}
-{#	<link rel="stylesheet" href="../static/style.css">#}
+	<link rel="stylesheet" href="../static/users.css">
 {% endblock %}
 
 {% block content %}
+    <div class="user-list">
+
     <table border="2">
         <tr>
             <th>Username</th>
             <th>Password</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+
             <th>Email</th>
+            <th>Phone</th>
+            <th>Admin</th>
+            <th>Salary start date</th>
+            <th>Salary</th>
+
         </tr>
    {% for user in users %}
    <tr>
-        <td>{{ i }}</td>
     {% for i in  user%}
     	<td>{{ i }}</td>
     {% endfor %}
 
-
-{#       <td>{{ user[1] }}</td>#}
-{#       <td>{{ user[2] }}</td>#}
-{#       <td>{{ user[3] }}</td>#}
-{#       <td>{{ user[4] }}</td>#}
    </tr>
    {% endfor %}
     </table>
+    </div>
+    <form method="POST">
+        <label for="users">users:</label>
+        <select name="users" id="users">
+            {% for i in users %}}
+                <option value="{{ i.username }}">{{ i.username }}</option>
+            {% endfor %}
+        </select>
+        <label for="action">Action:</label>
+        <select name="action" id="action">
+            <option value="change admin">change admin</option>
+            <option value="delete user">delete user</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
 
 {% endblock %}
+

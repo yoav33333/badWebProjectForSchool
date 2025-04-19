@@ -1,27 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Login</h1>
-        <form id="login-form" onsubmit="validateForm(event)" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <span id="username-error" class="error-message"></span>
+{% extends 'newBase.html' %}
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <span id="password-error" class="error-message"></span>
+{% block title %}Login{% endblock %}
 
-            <button type="submit">Submit</button>
-            <button type="button" onclick="resetForm()">Reset</button>
-        </form>
+{% block css %}
+    <link rel="stylesheet" href="../static/login.css">
+{% endblock %}
+
+{% block content %}
+    <div class="login-container">
+        <div class="login-form">
+            <h2>Login</h2>
+            <!-- Login Form -->
+            <form id="loginForm" method="POST" action="/login" onsubmit="validateForm()">
+                <div class="input-group">
+                    <label for="username">Username/Email</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username/email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <!-- Additional Links -->
+            <div class="login-links">
+                <a href="/signup">Sign Up</a>
+            </div>
+        </div>
     </div>
-    <script src="validateForm.js"></script>
-</body>
-</html>
+{% endblock %}

@@ -16,6 +16,7 @@ function validateForm() {
 
     let isValid = true;
 
+
     // Username validation
     if (!/^[A-Za-z0-9]+$/.test(username)) {
         usernameError.textContent = "Username can contain only letters and numbers, no spaces.";
@@ -26,7 +27,7 @@ function validateForm() {
     }
 
     // Password validation
-    if (password.length < 6 || password.length > 12) {
+    if (password.length <= 6 || password.length >= 12) {
         passwordError.textContent = "Password must be between 6 and 12 characters.";
         isValid = false;
     } else if (!/[A-Z]/.test(password)) {
@@ -35,7 +36,7 @@ function validateForm() {
     } else if (!/[0-9]/.test(password)) {
         passwordError.textContent = "Password must contain at least one number.";
         isValid = false;
-    } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+    } else if (!/[!@#$%^&*(),.?":{}|<>+]/.test(password)) {
         passwordError.textContent = "Password must contain at least one special character.";
         isValid = false;
     } else if (/\s/.test(password)) {
@@ -69,6 +70,8 @@ function validateForm() {
 
     if (!isValid) {
         document.getElementById("login-form").reset();
+        event.preventDefault();
+
     }
 }
 

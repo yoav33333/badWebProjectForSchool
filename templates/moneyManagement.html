@@ -1,0 +1,135 @@
+{% extends 'newBase.html' %}
+
+{% block title %}Money Management{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="/static/money_management.css">
+{% endblock %}
+
+{% block content %}
+<div class="page-layout">
+    <!-- Sidebar with Charts -->
+    <div class="sidebar">
+        <div class="chart-container">
+            <h2>Budget vs Expenses</h2>
+            <canvas id="expensesBudgetChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h2>Net Worth Over Time</h2>
+            <canvas id="netWorthChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>Money Management</h1>
+
+        <!-- Summary Section -->
+        <div class="summary">
+            <h2>Summary</h2>
+            <p><strong>Monthly Income:</strong> ${{ monthly_income }}</p>
+            <p><strong>Current Money:</strong> ${{ current_money }}</p>
+            <p><strong>Invested Money:</strong> ${{ invested_money }}</p>
+            <p><strong>Remaining Budget:</strong> ${{ remaining_budget }}</p>
+        </div>
+
+        <!-- Salary Management Section -->
+        <div class="collapsible-section">
+            <h2 onclick="toggleSection('income-management')">Income Management</h2>
+            <div id="income-management" class="collapsible-content">
+                <form method="POST">
+                    <label for="monthly_income">Monthly Income:</label>
+                    <input type="number" id="monthly_income" name="monthly_income" step="0.01" required>
+                    <label for="income_date">Income Date:</label>
+                    <input type="date" id="income_date" name="income_date" required>
+                    <button type="submit">Update Income</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Budget Management Section -->
+        <div class="collapsible-section">
+            <h2 onclick="toggleSection('budget-management')">Budget Management</h2>
+            <div id="budget-management" class="collapsible-content">
+                <form method="POST">
+                    <label for="monthly_budget">Monthly Budget:</label>
+                    <input type="number" id="monthly_budget" name="monthly_budget" value="{{ monthly_budget }}" step="0.01" required>
+                    <button type="submit">Update Budget</button>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    function toggleSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        section.style.display = section.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
+
+<!-- Restored Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const expensesBudgetCtx = document.getElementById('expensesBudgetChart').getContext('2d');
+    const netWorthCtx = document.getElementById('netWorthChart').getContext('2d');
+
+    // Budget vs Expenses Chart
+    new Chart(expensesBudgetCtx, {
+        type: 'pie',
+        data: {
+            labels: {{ expenses_data.labels | safe }},
+            datasets: [{
+                data: {{ expenses_data.data | safe }},
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40']
+            }]
+        }
+    });
+
+
+    // Net Worth Over Time Chart
+// Parse net worth data
+    const netWorthData = {{ net_worth_data | tojson }};
+    const labels = netWorthData.map(item => item.month);
+    const data = netWorthData.map(item => item.net_worth);
+
+    // Net Worth Over Time Chart
+    new Chart(netWorthCtx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Net Worth',
+                data: data,
+                borderColor: '#36A2EB',
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Month'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Net Worth ($)'
+                    },
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
