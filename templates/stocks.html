@@ -8,7 +8,16 @@
 {% block content %}
 <h1>Stocks</h1>
 
-
+<!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="messages">
+            {% for category, message in messages %}
+                <div class="message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
 <div class="content-container">
     <div class="forms-container">
         <!-- Buy Stock Form -->
@@ -53,21 +62,136 @@
         <canvas id="stockChart" style="width: 100%; height: 400px;"></canvas>
     </div>
 </div>
-<div class="time-period-selector">
-    <label for="time-period">Select Time Period:</label>
-    <select id="time-period" name="time_period" onchange="updateTimePeriod()">
-        <option value="6mo" {% if time_period == "6mo" %}selected{% endif %}>6 Months</option>
-        <option value="1y" {% if time_period == "1y" %}selected{% endif %}>1 Year</option>
-        <option value="5y" {% if time_period == "5y" %}selected{% endif %}>5 Years</option>
-        <option value="10y" {% if time_period == "10y" %}selected{% endif %}>10 Years</option>
-        <option value="max" {% if time_period == "max" %}selected{% endif %}>Max</option>
-    </select>
-</div>
 
-<script src="/static/stocks.js"></script>
 <canvas id="stockChart" style="width: 100%; height: 400px;"></canvas>
 
-<script>createChart({{ weekly_data|tojson }});</script>
+<script>
+document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form); // Collect form data
+        try {
+            // Send the data with a POST request
+            const response = await fetch('/stocks', {
+                method: 'POST',
+                body: formData
+            });
+
+            // Handle non-OK HTTP responses
+            if (!response.ok) {
+                alert(`Error: ${response.status} ${response.statusText}`);
+                return;
+            }
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Update the chart dynamically with new weekly data
+                updateChartWithNewData(result.weekly_data);
+
+                // Show a success message to the user
+const ctx = document.getElementById('stockChart').getContext('2d');
+const stockChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{ weekly_data|tojson }}.map(data => data.date),
+        datasets: [{
+            label: 'Total Money (USD)',
+            data: {{ weekly_data|tojson }}.map(data => data.price),
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 2,
+            fill: false,
+            pointRadius: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: true
+            }
+        },
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Date'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Total Money (USD)'
+                }
+            }
+        }
+    }
+});
+            } else {
+                // Handle a server-side error with the message returned
+                {#alert(result.error || "An error occurred. Please try again.");#}
+            }
+        } catch (error) {
+            // Handle network or unexpected JavaScript errors
+            {#console.error("An error occurred while processing the request:", error);#}
+            {#alert("A network error occurred. Please check your connection and try again.");#}
+        }
+    });
+});
+
+/**
+ * Updates the chart with new weekly data from the server response.
+ *
+ * @param {Array} weeklyData - Array of objects containing `date` and `price` properties.
+ */
+function updateChartWithNewData(weeklyData) {
+    const labels = weeklyData.map(data => data.date);
+    const prices = weeklyData.map(data => data.price);
+
+    stockChart.data.labels = labels; // Update the X-axis labels
+    stockChart.data.datasets[0].data = prices; // Update the dataset values
+    stockChart.update(); // Refresh the chart to reflect the changes
+}
+
+const ctx = document.getElementById('stockChart').getContext('2d');
+const stockChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{ weekly_data|tojson }}.map(data => data.date),
+        datasets: [{
+            label: 'Total Money (USD)',
+            data: {{ weekly_data|tojson }}.map(data => data.price),
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 2,
+            fill: false,
+            pointRadius: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: true
+            }
+        },
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Date'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Total Money (USD)'
+                }
+            }
+        }
+    }
+});
+</script>
 
 
 {% endblock %}
