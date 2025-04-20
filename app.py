@@ -454,7 +454,9 @@ def stocks():
                 (current_user, stock_name, quantity, stock_price, "buy", date))
 
             flash(f"Stock bought successfully! Current price: ${stock_price}", "success")
+            weekly_data = get_weekly_stock_data(time_period)
 
+            return {"success": True, "weekly_data": weekly_data}
         elif action == "sell":
             # Check total quantity owned
             total_quantity = runQuery(
@@ -480,7 +482,9 @@ def stocks():
                 (current_user, stock_name, quantity, 0, "sell", date))
 
             flash(f"Stock sold successfully!", "success")
+            weekly_data = get_weekly_stock_data(time_period)
 
+            return {"success": True, "weekly_data": weekly_data}
         # Fetch updated weekly data for the chart
         weekly_data = get_weekly_stock_data(time_period)
 

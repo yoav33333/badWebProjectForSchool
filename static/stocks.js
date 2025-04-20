@@ -4,35 +4,21 @@ function updateTimePeriod() {
 }
 
 
+/**
+ * Updates the chart with new weekly data from the server response.
+ *
+ * @param {Array} weeklyData - Array of objects containing `date` and `price` properties.
+ */
+function updateChartWithNewData(weeklyData) {
+    const labels = weeklyData.map(data => data.date);
+    const prices = weeklyData.map(data => data.price);
 
-document.querySelectorAll('form').forEach(form => {
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const formData = new FormData(form);
-        const response = await fetch('/stocks', {
-            method: 'POST',
-            body: formData
-        });
-
-        const result = await response.json();
-        if (result.success) {
-            // Update the chart with new data
-            const weeklyData = result.weekly_data;
-            const labels = weeklyData.map(data => data.date);
-            const prices = weeklyData.map(data => data.price);
-
-            stockChart.data.labels = labels;
-            stockChart.data.datasets[0].data = prices;
-            stockChart.update();
-        } else {
-            alert("An error occurred. Please try again.");
-        }
-    });
-});
+    stockChart.data.labels = labels; // Update the X-axis labels
+    stockChart.data.datasets[0].data = prices; // Update the dataset values
+    stockChart.update(); // Refresh the chart to reflect the changes
+}
 
 function createChart(weekly_data ){
-
 
 
     const ctx = document.getElementById('stockChart').getContext('2d');
@@ -74,3 +60,7 @@ function createChart(weekly_data ){
     });
 
 }
+
+
+
+
