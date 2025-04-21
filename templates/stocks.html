@@ -61,11 +61,26 @@
         <h2>Total Money Over Time</h2>
         <canvas id="stockChart" style="width: 100%; height: 400px;"></canvas>
     </div>
+<div class="time-period-selector">
+    <label for="time-period">Select Time Period:</label>
+    <select id="time-period" name="time_period" onchange="updateTimePeriod()">
+        <option value="6mo" {% if time_period == "6mo" %}selected{% endif %}>6 Months</option>
+        <option value="1y" {% if time_period == "1y" %}selected{% endif %}>1 Year</option>
+        <option value="5y" {% if time_period == "5y" %}selected{% endif %}>5 Years</option>
+        <option value="10y" {% if time_period == "10y" %}selected{% endif %}>10 Years</option>
+        <option value="max" {% if time_period == "max" %}selected{% endif %}>Max</option>
+    </select>
+</div>
 </div>
 
 <canvas id="stockChart" style="width: 100%; height: 400px;"></canvas>
 
 <script>
+function updateTimePeriod() {
+    const timePeriod = document.getElementById("time-period").value;
+    window.location.href = `/stocks?time_period=${timePeriod}`;
+}
+
 document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
